@@ -94,7 +94,7 @@ public class MaterialTextField: UIView {
         
         if textfield.isEmpty {
             print("Origin: \(self.placeHolder.frame.origin)")
-            let destination = CGPoint(x: textField.frame.origin.x, y: textField.frame.origin.y - 30) //mover label arriba
+            let destination = CGPoint(x: textField.frame.origin.x, y: -20) //mover label arriba
             
             
             UIView.animate(withDuration: 0.3) {
