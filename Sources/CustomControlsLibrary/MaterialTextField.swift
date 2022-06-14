@@ -81,4 +81,8 @@ public class MaterialTextField: UIView {
         placeHolder.text = placeHolderText
         activationIndicator.backgroundColor = activationColor
     }
+    
+    public func getValue() -> String? {
+        textField.text
+    }
 }
