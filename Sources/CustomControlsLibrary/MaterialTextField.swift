@@ -98,7 +98,7 @@ public class MaterialTextField: UIView {
             
             
             UIView.animate(withDuration: 0.3) {
-                self.placeHolder.center.y -= self.bounds.height + self.placeHolder.bounds.height
+                self.placeHolder.center.y -= 0 //self.bounds.height + self.placeHolder.bounds.height
                 self.placeHolder.font = UIFont.systemFont(ofSize: 13) //reducir tamaño de letra
                 print("Nuevo origin: \(self.placeHolder.frame.origin)")
             }
