@@ -19,7 +19,6 @@ public class MaterialTextField: UIView {
     lazy var placeHolder: UILabel = {
         let placeHolder = UILabel()
         placeHolder.translatesAutoresizingMaskIntoConstraints = false
-        placeHolder.backgroundColor = .yellow
         return placeHolder
     }()
     
@@ -101,7 +100,7 @@ public class MaterialTextField: UIView {
             UIView.animate(withDuration: 0.3) {
                 self.placeHolder.center.y = 5 //self.bounds.height + self.placeHolder.bounds.height
 //                self.placeHolder.font = UIFont.systemFont(ofSize: 13) //reducir tamaño de letra
-                let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                let scale = CGAffineTransform(scaleX: 1, y: 0.7)
                 let translate = CGAffineTransform(translationX: 0, y: 0)
                 self.placeHolder.transform = translate.concatenating(scale) //scale.concatenating(translate)
             }
