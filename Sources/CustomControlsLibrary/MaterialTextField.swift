@@ -19,6 +19,7 @@ public class MaterialTextField: UIView {
     lazy var placeHolder: UILabel = {
         let placeHolder = UILabel()
         placeHolder.translatesAutoresizingMaskIntoConstraints = false
+        placeHolder.backgroundColor = .yellow
         return placeHolder
     }()
     
