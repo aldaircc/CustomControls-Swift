@@ -91,15 +91,18 @@ public class MaterialTextField: UIView {
         guard let textfield = textField.text else {
             return
         }
-        UIView.animate(withDuration: 0.2) {
-            let oldFrame = self.placeHolder.frame
-            let newFrame = CGRect(x: 0, y: 5, width: oldFrame.width, height: oldFrame.height)
-            let translation = CGAffineTransform(translationX: newFrame.midX - oldFrame.midX, y: newFrame.midY - oldFrame.midY)
-            let scaling = CGAffineTransform(translationX: newFrame.width / oldFrame.width, y: newFrame.height / oldFrame.height)
+        
+        if textfield.isEmpty {
+            print("Origin: \(self.placeHolder.frame.origin)")
+            let destination = CGPoint(x: textField.frame.origin.x, y: -20) //mover label arriba
             
-            let transform = scaling.concatenating(translation)
             
-            self.placeHolder.transform = transform
+            UIView.animate(withDuration: 0.2) {
+                self.placeHolder.center.y = 5
+                let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
+                let translate = CGAffineTransform(translationX: -12, y: 0)
+                self.placeHolder.transform = scale.concatenating(translate)
+            }
         }
     }
 }
