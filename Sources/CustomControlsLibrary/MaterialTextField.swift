@@ -102,7 +102,7 @@ public class MaterialTextField: UIView {
 //                self.placeHolder.font = UIFont.systemFont(ofSize: 13) //reducir tamaño de letra
                 let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 let translate = CGAffineTransform(translationX: 0, y: 0)
-                self.placeHolder.transform = translate //scale.concatenating(translate)
+                self.placeHolder.transform = translate.concatenating(scale) //scale.concatenating(translate)
             }
         } else {
             
