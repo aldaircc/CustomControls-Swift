@@ -88,7 +88,11 @@ public class MaterialTextField: UIView {
     }
     
     public func placeHolderAnimation() {
-        if textField.text?.isEmpty {
+        guard let textfield = textField.text else {
+            return
+        }
+        
+        if textfield.isEmpty {
             print("Origin: \(self.placeHolder.frame.origin)")
             let destination = CGPoint(x: textField.frame.origin.x, y: textField.frame.origin.y - 10) //mover label arriba
             
