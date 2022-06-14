@@ -91,21 +91,15 @@ public class MaterialTextField: UIView {
         guard let textfield = textField.text else {
             return
         }
-        
-        if textfield.isEmpty {
-            print("Origin: \(self.placeHolder.frame.origin)")
-            let destination = CGPoint(x: textField.frame.origin.x, y: -20) //mover label arriba
+        UIView.animate(withDuration: 0.2) {
+            let oldFrame = self.placeHolder.frame
+            let newFrame = CGRect(x: 0, y: 5, width: oldFrame.width, height: oldFrame.height)
+            let translation = CGAffineTransform(translationX: newFrame.midX - oldFrame.midX, y: newFrame.midY - oldFrame.midY)
+            let scaling = CGAffineTransform(translationX: newFrame.width / oldFrame.width, y: newFrame.height / oldFrame.height)
             
+            let transform = scaling.concatenating(translation)
             
-            UIView.animate(withDuration: 0.2) {
-                self.placeHolder.center.y = 5 //self.bounds.height + self.placeHolder.bounds.height
-//                self.placeHolder.font = UIFont.systemFont(ofSize: 13) //reducir tamaño de letra
-                let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                let translate = CGAffineTransform(translationX: -12, y: 0)
-                self.placeHolder.transform = scale.concatenating(translate)
-            }
-        } else {
-            
+            self.placeHolder.transform = transform
         }
     }
 }
@@ -113,6 +107,10 @@ public class MaterialTextField: UIView {
 extension MaterialTextField: UITextFieldDelegate {
     //textFieldDidBeginEditing
     public func textFieldDidBeginEditing(_ textField: UITextField) {
+        placeHolderAnimation()
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
         placeHolderAnimation()
     }
 }
