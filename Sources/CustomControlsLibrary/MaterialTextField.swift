@@ -98,11 +98,14 @@ public class MaterialTextField: UIView {
             
             
             UIView.animate(withDuration: 0.2) {
-                self.placeHolder.center.y = 5
+                self.placeHolder.center.y = 5 //self.bounds.height + self.placeHolder.bounds.height
+//                self.placeHolder.font = UIFont.systemFont(ofSize: 13) //reducir tamaño de letra
                 let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                let translate = CGAffineTransform(translationX: -12, y: 0)
+                let translate = CGAffineTransform(translationX: -15, y: 0)
                 self.placeHolder.transform = scale.concatenating(translate)
             }
+        } else {
+            
         }
     }
 }
@@ -110,10 +113,6 @@ public class MaterialTextField: UIView {
 extension MaterialTextField: UITextFieldDelegate {
     //textFieldDidBeginEditing
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        placeHolderAnimation()
-    }
-    
-    public func textFieldDidEndEditing(_ textField: UITextField) {
         placeHolderAnimation()
     }
 }
