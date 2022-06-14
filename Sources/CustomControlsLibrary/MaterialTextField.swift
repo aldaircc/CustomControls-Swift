@@ -96,9 +96,10 @@ public class MaterialTextField: UIView {
             print("Origin: \(self.placeHolder.frame.origin)")
             let destination = CGPoint(x: textField.frame.origin.x, y: textField.frame.origin.y - 10) //mover label arriba
             
-            UIView.animate(withDuration: 1) {
+            UIView.animate(withDuration: 0.3) {
                 self.placeHolder.frame.origin = destination
-                self.placeHolder.font.withSize(6) //reducir tamaño de letra
+                self.placeHolder.font.withSize(3) //reducir tamaño de letra
+                self.placeHolder.textColor = .red
                 print("Nuevo origin: \(self.placeHolder.frame.origin)")
             }
         } else {
