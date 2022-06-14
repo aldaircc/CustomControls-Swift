@@ -12,6 +12,7 @@ public class MaterialTextField: UIView {
     lazy var textField: UITextField = {
         let textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.delegate = self
         return textField
     }()
     
@@ -84,5 +85,27 @@ public class MaterialTextField: UIView {
     
     public func getValue() -> String? {
         textField.text
+    }
+    
+    public func placeHolderAnimation() {
+        if textField.text?.isEmpty {
+            print("Origin: \(self.placeHolder.frame.origin)")
+            let destination = CGPoint(x: textField.frame.origin.x, y: textField.frame.origin.y - 10) //mover label arriba
+            
+            UIView.animate(withDuration: 1) {
+                self.placeHolder.frame.origin = destination
+                self.placeHolder.font.withSize(6) //reducir tamaño de letra
+                print("Nuevo origin: \(self.placeHolder.frame.origin)")
+            }
+        } else {
+            
+        }
+    }
+}
+
+extension MaterialTextField: UITextFieldDelegate {
+    //textFieldDidBeginEditing
+    public func textFieldDidBeginEditing(_ textField: UITextField) {
+        placeHolderAnimation()
     }
 }
