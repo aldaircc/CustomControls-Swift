@@ -73,7 +73,7 @@ public class MaterialTextField: UIView {
         ])
         
         NSLayoutConstraint.activate([
-            placeHolder.leadingAnchor.constraint(equalTo: textField.leadingAnchor, constant: 8),
+            placeHolder.leadingAnchor.constraint(equalTo: textField.leadingAnchor, constant: 1),
             placeHolder.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
         ])
     }
