@@ -61,7 +61,7 @@ public class MaterialTextField: UIView {
         
         NSLayoutConstraint.activate([
             activationIndicator.widthAnchor.constraint(equalTo: self.widthAnchor),
-            activationIndicator.heightAnchor.constraint(equalToConstant: 2),
+            activationIndicator.heightAnchor.constraint(equalToConstant: 1),
             activationIndicator.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
         
