@@ -29,17 +29,19 @@ public class MaterialTextField: UIView {
     
     let placeHolderText: String
     let activationColor: UIColor
-
+    
     // MARK: - Constructor
-        init(placeHolderText: String, activationColor: UIColor) {
-            self.placeHolderText = placeHolderText
-            self.activationColor = activationColor
-            super.init(frame: .zero)
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
+    init(placeHolderText: String, activationColor: UIColor) {
+        self.placeHolderText = placeHolderText
+        self.activationColor = activationColor
+        super.init(frame: .zero)
+        setupView()
+        configureControl()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     /*
      // Only override draw() if you perform custom drawing.
@@ -48,4 +50,35 @@ public class MaterialTextField: UIView {
      // Drawing code
      }
      */
+    
+    // MARK: - Methods
+    func setupView() {
+        self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(textField)
+        addSubview(placeHolder)
+        addSubview(activationIndicator)
+        
+        NSLayoutConstraint.activate([
+            activationIndicator.widthAnchor.constraint(equalTo: self.widthAnchor),
+            activationIndicator.heightAnchor.constraint(equalToConstant: 2),
+            activationIndicator.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            textField.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            textField.bottomAnchor.constraint(equalTo: activationIndicator.topAnchor),
+            textField.heightAnchor.constraint(equalToConstant: 20)
+        ])
+        
+        NSLayoutConstraint.activate([
+            placeHolder.leadingAnchor.constraint(equalTo: textField.leadingAnchor, constant: 8),
+            placeHolder.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
+        ])
+    }
+    
+    func configureControl() {
+        placeHolder.text = placeHolderText
+        activationIndicator.backgroundColor = activationColor
+    }
 }
