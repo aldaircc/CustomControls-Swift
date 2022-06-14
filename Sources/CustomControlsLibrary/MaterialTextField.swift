@@ -31,7 +31,7 @@ public class MaterialTextField: UIView {
     let activationColor: UIColor
     
     // MARK: - Constructor
-    init(placeHolderText: String, activationColor: UIColor) {
+    public init(placeHolderText: String, activationColor: UIColor) {
         self.placeHolderText = placeHolderText
         self.activationColor = activationColor
         super.init(frame: .zero)
