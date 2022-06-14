@@ -29,6 +29,17 @@ public class MaterialTextField: UIView {
     
     let placeHolderText: String
     let activationColor: UIColor
+
+    // MARK: - Constructor
+        init(placeHolderText: String, activationColor: UIColor) {
+            self.placeHolderText = placeHolderText
+            self.activationColor = activationColor
+            super.init(frame: .zero)
+        }
+        
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     
     /*
      // Only override draw() if you perform custom drawing.
