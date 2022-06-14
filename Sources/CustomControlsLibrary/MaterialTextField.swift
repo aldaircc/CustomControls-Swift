@@ -97,7 +97,7 @@ public class MaterialTextField: UIView {
             let destination = CGPoint(x: textField.frame.origin.x, y: -20) //mover label arriba
             
             
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.2) {
                 self.placeHolder.center.y = 5 //self.bounds.height + self.placeHolder.bounds.height
 //                self.placeHolder.font = UIFont.systemFont(ofSize: 13) //reducir tamaño de letra
                 let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
