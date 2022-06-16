@@ -30,6 +30,7 @@ public class MaterialTextField: UIView {
     
     let placeHolderText: String
     let activationColor: UIColor
+    private(set) var positionY: CGFloat = 0
     
     // MARK: - Constructor
     public init(placeHolderText: String, activationColor: UIColor) {
@@ -76,6 +77,8 @@ public class MaterialTextField: UIView {
             placeHolder.leadingAnchor.constraint(equalTo: textField.leadingAnchor, constant: 1),
             placeHolder.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
         ])
+        
+        positionY = placeHolder.center.y
     }
     
     func configureControl() {
@@ -87,25 +90,25 @@ public class MaterialTextField: UIView {
         textField.text
     }
     
-    public func placeHolderAnimation() {
+    public func placeHolderAnimation(onFocus: Bool) {
         guard let textfield = textField.text else {
             return
         }
         
-        if textfield.isEmpty {
-            print("Origin: \(self.placeHolder.frame.origin)")
-            let destination = CGPoint(x: textField.frame.origin.x, y: -20) //mover label arriba
-            
-            
+        if textfield.isEmpty && onFocus {
             UIView.animate(withDuration: 0.2) {
-                self.placeHolder.center.y = 5 //self.bounds.height + self.placeHolder.bounds.height
-//                self.placeHolder.font = UIFont.systemFont(ofSize: 13) //reducir tamaño de letra
+                self.placeHolder.center.y = 5
                 let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
                 let translate = CGAffineTransform(translationX: -15, y: 0)
                 self.placeHolder.transform = scale.concatenating(translate)
             }
         } else {
-            
+            UIView.animate(withDuration: 0.2) {
+                self.placeHolder.center.y = self.positionY
+                let scale = CGAffineTransform(scaleX: 1, y: 1)
+                let translate = CGAffineTransform(translationX: 0, y: 0)
+                self.placeHolder.transform = scale.concatenating(translate)
+            }
         }
     }
 }
@@ -113,6 +116,10 @@ public class MaterialTextField: UIView {
 extension MaterialTextField: UITextFieldDelegate {
     //textFieldDidBeginEditing
     public func textFieldDidBeginEditing(_ textField: UITextField) {
-        placeHolderAnimation()
+        placeHolderAnimation(onFocus: true)
+    }
+    
+    public func textFieldDidEndEditing(_ textField: UITextField) {
+        placeHolderAnimation(onFocus: false)
     }
 }
