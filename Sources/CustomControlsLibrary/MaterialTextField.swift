@@ -96,6 +96,7 @@ public class MaterialTextField: UIView {
         
         if !isFirstFocus {
             positionY = placeHolder.center.y
+            isFirstFocus.toggle()
         }
         
         if textfield.isEmpty && onFocus {
