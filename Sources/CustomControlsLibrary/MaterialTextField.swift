@@ -122,6 +122,8 @@ public class MaterialTextField: UIView {
             self.placeHolder.transform = scale.concatenating(translate)
         }
         
+        placeHolder.isHidden = !textfield.isEmpty
+        
     }
 }
 
