@@ -31,6 +31,7 @@ public class MaterialTextField: UIView {
     let placeHolderText: String
     let activationColor: UIColor
     private(set) var positionY: CGFloat = 0
+    private(set) var isFirstFocus = false
     
     // MARK: - Constructor
     public init(placeHolderText: String, activationColor: UIColor) {
@@ -77,8 +78,6 @@ public class MaterialTextField: UIView {
             placeHolder.leadingAnchor.constraint(equalTo: textField.leadingAnchor, constant: 1),
             placeHolder.centerYAnchor.constraint(equalTo: textField.centerYAnchor)
         ])
-        
-        positionY = placeHolder.center.y
     }
     
     func configureControl() {
@@ -93,6 +92,10 @@ public class MaterialTextField: UIView {
     public func placeHolderAnimation(onFocus: Bool) {
         guard let textfield = textField.text else {
             return
+        }
+        
+        if isFirstFocus {
+            positionY = placeHolder.center.y
         }
         
         if textfield.isEmpty && onFocus {
