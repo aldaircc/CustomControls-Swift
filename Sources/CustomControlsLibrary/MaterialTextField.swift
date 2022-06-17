@@ -121,9 +121,6 @@ public class MaterialTextField: UIView {
             let translate = CGAffineTransform(translationX: onFocus ? -15 : 0, y: 0)
             self.placeHolder.transform = scale.concatenating(translate)
         }
-        
-        placeHolder.isHidden = !textfield.isEmpty
-        
     }
 }
 
