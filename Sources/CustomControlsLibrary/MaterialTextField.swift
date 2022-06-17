@@ -99,21 +99,29 @@ public class MaterialTextField: UIView {
             isFirstFocus.toggle()
         }
         
-        if textfield.isEmpty && onFocus {
-            UIView.animate(withDuration: 0.2) {
-                self.placeHolder.center.y = 5
-                let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
-                let translate = CGAffineTransform(translationX: -15, y: 0)
-                self.placeHolder.transform = scale.concatenating(translate)
-            }
-        } else {
-            UIView.animate(withDuration: 0.2) {
-                self.placeHolder.center.y = self.positionY
-                let scale = CGAffineTransform(scaleX: 1, y: 1)
-                let translate = CGAffineTransform(translationX: 0, y: 0)
-                self.placeHolder.transform = scale.concatenating(translate)
-            }
+//        if textfield.isEmpty && onFocus {
+//            UIView.animate(withDuration: 0.2) {
+//                self.placeHolder.center.y = 5
+//                let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
+//                let translate = CGAffineTransform(translationX: -15, y: 0)
+//                self.placeHolder.transform = scale.concatenating(translate)
+//            }
+//        } else {
+//            UIView.animate(withDuration: 0.2) {
+//                self.placeHolder.center.y = self.positionY
+//                let scale = CGAffineTransform(scaleX: 1, y: 1)
+//                let translate = CGAffineTransform(translationX: 0, y: 0)
+//                self.placeHolder.transform = scale.concatenating(translate)
+//            }
+//        }
+        
+        UIView.animate(withDuration: 0.2) {
+            self.placeHolder.center.y = onFocus ? 5 : self.positionY
+            let scale = CGAffineTransform(scaleX: onFocus ? 0.7 : 1, y: onFocus ? 0.7 : 1)
+            let translate = CGAffineTransform(translationX: onFocus ? -15 : 0, y: 0)
+            self.placeHolder.transform = scale.concatenating(translate)
         }
+        
     }
 }
 
