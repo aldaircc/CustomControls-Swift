@@ -94,7 +94,7 @@ public class MaterialTextField: UIView {
             return
         }
         
-        if isFirstFocus {
+        if !isFirstFocus {
             positionY = placeHolder.center.y
         }
         
