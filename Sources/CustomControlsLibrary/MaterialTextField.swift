@@ -82,7 +82,11 @@ public class MaterialTextField: UIView {
     
     func configureControl() {
         placeHolder.text = placeHolderText
-        activationIndicator.backgroundColor = activationColor
+        activationIndicator.backgroundColor = .gray
+    }
+    
+    public func setValue(_ content: String) {
+        textField.text = content
     }
     
     public func getValue() -> String? {
@@ -90,33 +94,15 @@ public class MaterialTextField: UIView {
     }
     
     public func placeHolderAnimation(onFocus: Bool) {
-        guard let textfield = textField.text else {
-            return
-        }
-        
         if !isFirstFocus {
             positionY = placeHolder.center.y
             isFirstFocus.toggle()
         }
         
-//        if textfield.isEmpty && onFocus {
-//            UIView.animate(withDuration: 0.2) {
-//                self.placeHolder.center.y = 5
-//                let scale = CGAffineTransform(scaleX: 0.7, y: 0.7)
-//                let translate = CGAffineTransform(translationX: -15, y: 0)
-//                self.placeHolder.transform = scale.concatenating(translate)
-//            }
-//        } else {
-//            UIView.animate(withDuration: 0.2) {
-//                self.placeHolder.center.y = self.positionY
-//                let scale = CGAffineTransform(scaleX: 1, y: 1)
-//                let translate = CGAffineTransform(translationX: 0, y: 0)
-//                self.placeHolder.transform = scale.concatenating(translate)
-//            }
-//        }
+        activationIndicator.backgroundColor = onFocus ? activationColor : .gray
         
         UIView.animate(withDuration: 0.2) {
-            self.placeHolder.center.y = onFocus ? 5 : self.positionY
+            self.placeHolder.center.y = (onFocus || (self.textField.text?.count != 0)) ? 5 : self.positionY
             let scale = CGAffineTransform(scaleX: onFocus ? 0.7 : 1, y: onFocus ? 0.7 : 1)
             let translate = CGAffineTransform(translationX: onFocus ? -15 : 0, y: 0)
             self.placeHolder.transform = scale.concatenating(translate)
@@ -125,7 +111,6 @@ public class MaterialTextField: UIView {
 }
 
 extension MaterialTextField: UITextFieldDelegate {
-    //textFieldDidBeginEditing
     public func textFieldDidBeginEditing(_ textField: UITextField) {
         placeHolderAnimation(onFocus: true)
     }
