@@ -34,6 +34,6 @@ class RatingControlTests: XCTestCase {
     func testGetValue() throws {
         ratingControl = RatingControl(size: size, value: 2)
         let value = try XCTUnwrap(ratingControl?.value)
-        
+        ratingControl?.ratingSelectionChanging(sender: ratingControl?.contentStackView.arrangedSubviews.first as! UIImageView)
     }
 }
