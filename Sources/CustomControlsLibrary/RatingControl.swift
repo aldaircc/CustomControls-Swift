@@ -23,7 +23,7 @@ class RatingControl: UIControl {
     let size: Int
     private(set) var value: Int
     
-    init(size: Int, value: Int) {
+    public init(size: Int, value: Int) {
         self.size = size
         self.value = value
         super.init(frame: .zero)
@@ -53,7 +53,7 @@ class RatingControl: UIControl {
         return UIImageView()
     }
     
-    func ratingSelectionChanging(_ sender: UIImageView) {
+    @IBAction func ratingSelectionChanging(_ sender: UIImageView) {
         sendActions(for: .valueChanged)
     }
     
