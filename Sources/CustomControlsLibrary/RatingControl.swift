@@ -17,6 +17,7 @@ public class RatingControl: UIControl {
         stack.distribution = .equalSpacing
         stack.spacing = 5
         stack.axis = .horizontal
+        stack.backgroundColor = .yellow
         return stack
     }()
     
@@ -47,6 +48,11 @@ public class RatingControl: UIControl {
             image.withTintColor(selected ? .yellow : .clear)
             let imageView = UIImageView(image: image)
             imageView.tag = id
+
+            let tapped = UITapGestureRecognizer(target: self, action: #selector(ratingSelectionChanging(_:)))
+            imageView.isUserInteractionEnabled = true
+            imageView.addGestureRecognizer(tapped)
+            
             return imageView
         }
         
@@ -54,6 +60,7 @@ public class RatingControl: UIControl {
     }
     
     @IBAction func ratingSelectionChanging(_ sender: UIImageView) {
+        print(sender)
         sendActions(for: .valueChanged)
     }
     
