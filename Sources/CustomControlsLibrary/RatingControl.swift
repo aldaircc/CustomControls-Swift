@@ -59,8 +59,9 @@ public class RatingControl: UIControl {
         return UIImageView()
     }
     
-    @IBAction func ratingSelectionChanging(_ sender: UIImageView) {
+    @IBAction public func ratingSelectionChanging(_ sender: UIImageView) {
         print(sender)
+        print(sender.tag)
         sendActions(for: .valueChanged)
     }
     
