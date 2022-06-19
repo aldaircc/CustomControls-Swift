@@ -49,7 +49,7 @@ public class RatingControl: UIControl {
             let imageView = UIImageView(image: image)
             imageView.tag = id
 
-            let tapped = UITapGestureRecognizer(target: image, action: #selector(ratingSelectionChanging(sender:)))
+            let tapped = UITapGestureRecognizer(target: imageView, action: #selector(ratingSelectionChanging(sender:)))
             imageView.isUserInteractionEnabled = true
             imageView.addGestureRecognizer(tapped)
             
