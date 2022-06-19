@@ -27,7 +27,15 @@ class RatingControl: UIControl {
     }
     
     func setupView() {
+        addSubview(contentStackView)
         
+        for index in 0..<quantity {
+            contentStackView.addArrangedSubview(generateView(id: index))
+        }
+    }
+    
+    func generateView(id: Int) -> UIView {
+        return UIView()
     }
     
     /*
