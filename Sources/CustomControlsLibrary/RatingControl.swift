@@ -43,25 +43,24 @@ public class RatingControl: UIControl {
         }
     }
     
-    func generateView(id: Int, selected: Bool) -> UIImageView {
+    func generateView(id: Int, selected: Bool) -> UIButton {
         if let image = UIImage(systemName: !selected ? "star" : "star.fill") {
             image.withTintColor(selected ? .yellow : .clear)
-            let imageView = UIImageView(image: image)
-            imageView.tag = id
-
-            let tapped = UITapGestureRecognizer(target: self, action: #selector(ratingSelectionChanging(sender:)))
-            imageView.isUserInteractionEnabled = true
-            imageView.addGestureRecognizer(tapped)
+            let button = UIButton()
+            button.tag = id
+            button.backgroundColor = .red
+            button.setImage(image, for: .normal)
+            button.addTarget(button, action: #selector(ratingSelectionChanging(_:)), for: .touchUpInside)
             
-            return imageView
+            return button
         }
         
-        return UIImageView()
+        return UIButton()
     }
     
-    @IBAction public func ratingSelectionChanging(sender: UIImageView) {
+    @IBAction public func ratingSelectionChanging(_ sender: UIButton) {
         print(sender)
-        print(sender.tag)
+        //print(sender.tag)
         sendActions(for: .valueChanged)
     }
     
