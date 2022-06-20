@@ -50,7 +50,7 @@ public class RatingControl: UIControl {
             button.tag = id
             button.backgroundColor = .red
             button.setImage(image, for: .normal)
-            button.addTarget(button, action: #selector(ratingSelectionChanging(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(ratingSelectionChanging(_:)), for: .touchUpInside)
             
             return button
         }
