@@ -60,7 +60,7 @@ public class RatingControl: UIControl {
     
     @IBAction public func ratingSelectionChanging(_ sender: UIButton) {
         print(sender)
-        //print(sender.tag)
+        print(sender.tag)
         sendActions(for: .valueChanged)
     }
     
