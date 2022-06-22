@@ -73,16 +73,9 @@ public class RatingControl: UIControl {
     
     func setColorToRating(value: Int) {
         ratingImages.enumerated().forEach { element in
-            //element.offset
-            //element.element
-            let image = UIImage(systemName: (element.offset <= value) ? "star.fill" : "star")?.withTintColor((element.offset <= value) ? .yellow : .clear)
-            element.element.setImage(image, for: .normal)
-            
-//            if element.offset <= value {
-//            element.element.setImage(UIImage(systemName: "star.fill"), for: .normal)
-//            } else {
-//                element.element.setImage(UIImage(systemName: "star.fill"), for: .normal)
-//            }
+            let image = UIImage(systemName: (element.offset < value) ? "star.fill" : "star")
+            element.element.setImage(image?.withTintColor(.yellow), for: .normal)
+            //.withTintColor((element.offset < value) ? .yellow : .clear)
         }
     }
     
