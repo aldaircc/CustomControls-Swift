@@ -23,6 +23,7 @@ public class RatingControl: UIControl {
     
     let size: Int
     private(set) var value: Int
+    private(set) var ratingImages: [UIButton] = []
     
     public init(size: Int, value: Int) {
         self.size = size
@@ -39,7 +40,12 @@ public class RatingControl: UIControl {
         addSubview(contentStackView)
         
         for index in 0..<size {
-            contentStackView.addArrangedSubview(generateView(id: index, selected: false))
+            ratingImages.append(generateView(id: index, selected: false))
+            //contentStackView.addArrangedSubview()
+        }
+        
+        ratingImages.forEach { button in
+            contentStackView.addArrangedSubview(button)
         }
     }
     
@@ -54,7 +60,6 @@ public class RatingControl: UIControl {
             
             return button
         }
-        
         return UIButton()
     }
     
@@ -62,7 +67,23 @@ public class RatingControl: UIControl {
         print(sender)
         print(sender.tag)
         value = sender.tag + 1
+        setColorToRating(value: value)
         sendActions(for: .valueChanged)
+    }
+    
+    func setColorToRating(value: Int) {
+        ratingImages.enumerated().forEach { element in
+            //element.offset
+            //element.element
+            let image = UIImage(systemName: (element.offset <= value) ? "star.fill" : "star")?.withTintColor((element.offset <= value) ? .yellow : .clear)
+            element.element.setImage(image, for: .normal)
+            
+//            if element.offset <= value {
+//            element.element.setImage(UIImage(systemName: "star.fill"), for: .normal)
+//            } else {
+//                element.element.setImage(UIImage(systemName: "star.fill"), for: .normal)
+//            }
+        }
     }
     
     /*
