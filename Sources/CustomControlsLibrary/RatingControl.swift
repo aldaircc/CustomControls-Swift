@@ -22,7 +22,7 @@ public class RatingControl: UIControl {
     }()
     
     let size: Int
-    private(set) var value: Int
+    public private(set) var value: Int
     private(set) var ratingImages: [UIButton] = []
     
     public init(size: Int, value: Int) {
