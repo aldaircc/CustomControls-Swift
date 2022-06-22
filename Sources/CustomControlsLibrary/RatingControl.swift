@@ -38,12 +38,9 @@ public class RatingControl: UIControl {
     
     func setupView() {
         addSubview(contentStackView)
-        
         for index in 0..<size {
             ratingImages.append(generateView(id: index, selected: false))
-            //contentStackView.addArrangedSubview()
         }
-        
         ratingImages.forEach { button in
             contentStackView.addArrangedSubview(button)
         }
@@ -53,7 +50,7 @@ public class RatingControl: UIControl {
         if let image = UIImage(systemName: !selected ? "star" : "star.fill") {
             image.withTintColor(selected ? .yellow : .clear)
             let button = UIButton()
-            button.tag = id
+            button.tag = 0 //id
             button.backgroundColor = .red
             button.setImage(image, for: .normal)
             button.addTarget(self, action: #selector(ratingSelectionChanging(_:)), for: .touchUpInside)
@@ -64,20 +61,28 @@ public class RatingControl: UIControl {
     }
     
     @IBAction public func ratingSelectionChanging(_ sender: UIButton) {
-        print(sender)
-        print(sender.tag)
-        value = sender.tag + 1
-        setColorToRating(value: value)
+        setColorToRating(value: sender.tag + 1)
         sendActions(for: .valueChanged)
     }
     
     func setColorToRating(value: Int) {
         ratingImages.enumerated().forEach { element in
+            
+            guard self.value != value else {
+                let isOn = element.element.tag
+                let image = UIImage(systemName: (isOn == 0) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+                image?.withTintColor(.yellow)
+                element.element.tag = (isOn == 0) ? 1 : 0
+                element.element.setImage(image, for: .normal)
+                return
+            }
+            
             let image = UIImage(systemName: (element.offset < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
             image?.withTintColor(.yellow)
+            element.element.tag = 1
             element.element.setImage(image, for: .normal)
-//            element.element.setImage(image, for: .highlighted)
         }
+        self.value = (self.value != value) ? value : 0
     }
     
     /*
