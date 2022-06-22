@@ -72,7 +72,6 @@ public class RatingControl: UIControl {
                 let isOn = element.element.isSelected
                 let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
-                //element.element.tag = (isOn == 0) ? 1 : 0
                 element.element.setImage(image, for: .normal)
                 element.element.isSelected.toggle()
                 return
@@ -80,7 +79,6 @@ public class RatingControl: UIControl {
             
             let image = UIImage(systemName: (element.offset < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
             image?.withTintColor(.yellow)
-            //element.element.tag = 1
             element.element.setImage(image, for: .normal)
             element.element.isSelected.toggle()
         }
