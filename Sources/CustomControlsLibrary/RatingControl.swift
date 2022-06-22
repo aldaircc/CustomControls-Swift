@@ -50,7 +50,7 @@ public class RatingControl: UIControl {
         if let image = UIImage(systemName: !selected ? "star" : "star.fill") {
             image.withTintColor(selected ? .yellow : .clear)
             let button = UIButton()
-            button.tag = 0 //id
+            button.tag = id
             button.backgroundColor = .red
             button.setImage(image, for: .normal)
             button.addTarget(self, action: #selector(ratingSelectionChanging(_:)), for: .touchUpInside)
@@ -72,14 +72,14 @@ public class RatingControl: UIControl {
                 let isOn = element.element.tag
                 let image = UIImage(systemName: (isOn == 0) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
-                element.element.tag = (isOn == 0) ? 1 : 0
+                //element.element.tag = (isOn == 0) ? 1 : 0
                 element.element.setImage(image, for: .normal)
                 return
             }
             
             let image = UIImage(systemName: (element.offset < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
             image?.withTintColor(.yellow)
-            element.element.tag = 1
+            //element.element.tag = 1
             element.element.setImage(image, for: .normal)
         }
         self.value = (self.value != value) ? value : 0
