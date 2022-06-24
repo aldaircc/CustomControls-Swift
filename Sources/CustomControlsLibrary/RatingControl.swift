@@ -24,6 +24,7 @@ public class RatingControl: UIControl {
     let size: Int
     public private(set) var value: Int
     private(set) var ratingImages: [UIButton] = []
+    private(set) var prevSelectedValues: [Bool] = []
     
     public init(size: Int, value: Int) {
         self.size = size
@@ -43,6 +44,7 @@ public class RatingControl: UIControl {
         }
         ratingImages.forEach { button in
             contentStackView.addArrangedSubview(button)
+            prevSelectedValues.append(button.isSelected)
         }
     }
     
@@ -69,11 +71,22 @@ public class RatingControl: UIControl {
         ratingImages.enumerated().forEach { element in
             
             guard self.value != value else {
+                
+                if value < self.value {
+                    // modificar el valor y el aspecto grafico a los items de indice mayor al nuevo value y menores igual a los items con indice menor "self.value"
+                } else {
+                    // Modificar solo a los que son indice mayor al actual "self.value"
+                }
+                
+                let prevSelectedValue = prevSelectedValues[element.offset]
                 let isOn = element.element.isSelected
                 let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
                 element.element.setImage(image, for: .normal)
-                element.element.isSelected.toggle()
+                //element.element.isSelected.toggle()
+                element.element.isSelected = false
+                
+                
                 return
             }
             
@@ -81,6 +94,7 @@ public class RatingControl: UIControl {
             image?.withTintColor(.yellow)
             element.element.setImage(image, for: .normal)
             element.element.isSelected.toggle()
+            
         }
         self.value = (self.value != value) ? value : 0
     }
