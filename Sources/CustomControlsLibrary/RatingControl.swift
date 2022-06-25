@@ -74,54 +74,60 @@ public class RatingControl: UIControl {
             let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
             image?.withTintColor(.yellow)
             element.element.setImage(image, for: .normal)
-            //element.element.isSelected = false
         }
     }
     
     func setColorToRating(newValue: Int) {
-        /*: 1 - Happy Path
-         - Seleciono 3
-         - Se seleccionan los items 1, 2 y 3
+        /*:
+         selecciono 1
+         reseteo apariencia
+         valido que newValue y value sean diferentes
+         Si newValue y value son iguales = preservo valore hasta ese indice el resto los reseteo o false
+         
          */
-        
-        ratingImages.enumerated().forEach { element in
-            let index = element.offset
-            let prevSelected = prevSelectedValues[index]
+        resetRatingSelection()
+        ratingImages.enumerated().forEach { rating in
+            let index = rating.offset
             
-            //Siempre que newValue y self.value sean diferentes.
-            
-            // Si new value es menor que self.value
-            // preservar valor hasta newValue
-            
-            // Si new Value es mayor que self.value
-            // preservar valor hasta self.value
-            // y modificar los que sean menor o igual que newValue
-            
-            guard newValue != self.value else {
-                let image = UIImage(systemName: !prevSelected ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                image?.withTintColor(.yellow)
-                element.element.setImage(image, for: .normal)
-                element.element.isSelected = !prevSelected
-                prevSelectedValues[index] = !prevSelected
-                return
+            if newValue == value {
+                if (index < newValue) {
+                    prevSelectedValues[index] = prevSelectedValues[index]
+                    let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    rating.element.setImage(image, for: .normal)
+                    rating.element.isSelected = prevSelectedValues[index]
+                } else {
+                    prevSelectedValues[index] = !prevSelectedValues[index]
+                    let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    rating.element.setImage(image, for: .normal)
+                    rating.element.isSelected = prevSelectedValues[index]
+                }
             }
             
-            if newValue < value {
+            if value > newValue {
+                // solo actualizo los indices que son mayor/igual a newValue
                 
-                let image = UIImage(systemName: (index < newValue) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                image?.withTintColor(.yellow)
-                element.element.setImage(image, for: .normal)
-                element.element.isSelected = (index < newValue) ? prevSelected : !prevSelected
-                prevSelectedValues[index] = (index < newValue) ? prevSelected : !prevSelected
+                if index >= newValue {
+                    prevSelectedValues[index] = !prevSelectedValues[index]
+                    let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    rating.element.setImage(image, for: .normal)
+                    rating.element.isSelected = prevSelectedValues[index]
+                }
                 
             } else if newValue > value {
-                let image = UIImage(systemName: (index < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                image?.withTintColor(.yellow)
-                element.element.setImage(image, for: .normal)
-                element.element.isSelected = (index < value) ? prevSelected : !prevSelected
-                prevSelectedValues[index] = (index < value) ? prevSelected : !prevSelected
+                // solo actualizo los indice que son mayor/igual a value
+                if index >= value {
+                    prevSelectedValues[index] = !prevSelectedValues[index]
+                    let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    rating.element.setImage(image, for: .normal)
+                    rating.element.isSelected = prevSelectedValues[index]
+                }
             }
         }
+        
         self.value = (value != newValue) ? newValue : 0
         self.isFirstTime = false
     }
