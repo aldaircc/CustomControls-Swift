@@ -85,7 +85,7 @@ public class RatingControl: UIControl {
             
             guard newValue != value else {
                 let prev = prevSelectedValues[indice]
-                let image = UIImage(systemName: !prev ? "star": "star.fill")?.withRenderingMode(.alwaysOriginal)
+                let image = UIImage(systemName: !prev ? "star.fill": "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
                 ratingImages[indice].setImage(image, for: .normal)
                 prevSelectedValues[indice] = !prev
