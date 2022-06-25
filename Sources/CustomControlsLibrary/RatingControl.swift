@@ -114,6 +114,11 @@ public class RatingControl: UIControl {
                     image?.withTintColor(.yellow)
                     rating.element.setImage(image, for: .normal)
                     rating.element.isSelected = prevSelectedValues[index]
+                } else {
+                    let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    rating.element.setImage(image, for: .normal)
+                    rating.element.isSelected = prevSelectedValues[index]
                 }
                 
             } else if newValue > value {
@@ -121,6 +126,11 @@ public class RatingControl: UIControl {
                 if index >= value {
                     prevSelectedValues[index] = !prevSelectedValues[index]
                     let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    rating.element.setImage(image, for: .normal)
+                    rating.element.isSelected = prevSelectedValues[index]
+                } else {
+                    let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
                     image?.withTintColor(.yellow)
                     rating.element.setImage(image, for: .normal)
                     rating.element.isSelected = prevSelectedValues[index]
