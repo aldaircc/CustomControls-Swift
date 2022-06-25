@@ -73,7 +73,7 @@ public class RatingControl: UIControl {
             let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
             image?.withTintColor(.yellow)
             element.element.setImage(image, for: .normal)
-            element.element.isSelected = false
+            //element.element.isSelected = false
         }
     }
     
@@ -87,15 +87,29 @@ public class RatingControl: UIControl {
              set next value.
              */
             
-            guard newValue > element.offset else {
+            guard newValue != value else {
+                if element.offset < newValue {
+                    let prevSelected1 = prevSelectedValues[element.offset]
+                    let isOn = element.element.isSelected
+                    let image = UIImage(systemName: (prevSelected1 == !isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    element.element.setImage(image, for: .normal)
+                    element.element.isSelected = !prevSelected1
+                    prevSelectedValues[element.offset].toggle()
+                }
                 return
             }
-
-            let isOn = element.element.isSelected
-            let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-            image?.withTintColor(.yellow)
-            element.element.setImage(image, for: .normal)
-            element.element.isSelected.toggle()
+            
+            if element.offset < newValue {
+                let prevSelected2 = prevSelectedValues[element.offset]
+                prevSelectedValues[element.offset].toggle()
+                let isOn = element.element.isSelected
+                let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+                image?.withTintColor(.yellow)
+                element.element.setImage(image, for: .normal)
+                element.element.isSelected = !prevSelected2
+            }
+            
         }
         self.value = (self.value != newValue) ? newValue : 0
     }
