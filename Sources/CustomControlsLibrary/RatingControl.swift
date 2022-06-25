@@ -22,6 +22,7 @@ public class RatingControl: UIControl {
     }()
     
     let size: Int
+    private(set) var prevValue: Int = 0
     public private(set) var value: Int
     private(set) var ratingImages: [UIButton] = []
     private(set) var prevSelectedValues: [Bool] = []
@@ -63,40 +64,77 @@ public class RatingControl: UIControl {
     }
     
     @IBAction public func ratingSelectionChanging(_ sender: UIButton) {
-        setColorToRating(value: sender.tag + 1)
+        setColorToRating(newValue: sender.tag + 1)
         sendActions(for: .valueChanged)
     }
     
-    func setColorToRating(value: Int) {
+    func setColorToRating(newValue: Int) {
         ratingImages.enumerated().forEach { element in
             
-            guard self.value != value else {
-                
-                if value < self.value {
-                    // modificar el valor y el aspecto grafico a los items de indice mayor al nuevo value y menores igual a los items con indice menor "self.value"
+//            guard self.value != value else {
+//
+//                if value >= element.offset {
+//                    let isOn = element.element.isSelected
+//                    let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+//                    image?.withTintColor(.yellow)
+//                    element.element.setImage(image, for: .normal)
+//                    element.element.isSelected.toggle()
+//
+//                } else {
+//                    let isOn = element.element.isSelected
+//                    let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+//                    image?.withTintColor(.yellow)
+//                    element.element.setImage(image, for: .normal)
+//                    element.element.isSelected = false
+//                }
+//
+//
+//                //element.element.isSelected = false
+//
+//
+//                return
+//            }
+//
+//            let image = UIImage(systemName: (element.offset < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+//            image?.withTintColor(.yellow)
+//            element.element.setImage(image, for: .normal)
+//            element.element.isSelected.toggle()
+            
+            guard self.value != newValue else {
+                // evaluar los indices menores a valor
+                // verificar su antiguo valor "isSelected"
+                if newValue > element.offset {
+                    let isOn = element.element.isSelected
+                    let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    element.element.setImage(image, for: .normal)
+                    element.element.isSelected = !isOn
                 } else {
-                    // Modificar solo a los que son indice mayor al actual "self.value"
+                    let isOn = element.element.isSelected
+                    let image = UIImage(systemName: (isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    element.element.setImage(image, for: .normal)
+                    element.element.isSelected = false
                 }
-                
-                let prevSelectedValue = prevSelectedValues[element.offset]
+                return
+            }
+            
+            if newValue > element.offset {
                 let isOn = element.element.isSelected
                 let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
                 element.element.setImage(image, for: .normal)
-                //element.element.isSelected.toggle()
+                element.element.isSelected.toggle()
+            } else {
+                let isOn = element.element.isSelected
+                let image = UIImage(systemName: (isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+                image?.withTintColor(.yellow)
+                element.element.setImage(image, for: .normal)
                 element.element.isSelected = false
-                
-                
-                return
             }
             
-            let image = UIImage(systemName: (element.offset < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-            image?.withTintColor(.yellow)
-            element.element.setImage(image, for: .normal)
-            element.element.isSelected.toggle()
-            
         }
-        self.value = (self.value != value) ? value : 0
+        self.value = (self.value != newValue) ? newValue : 0
     }
     
     /*
