@@ -106,7 +106,7 @@ public class RatingControl: UIControl {
                 return
             }
             
-            if newValue < value && !isFirstTime {
+            if newValue < value {
                 
                 let image = UIImage(systemName: (index < newValue || isFirstTime) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
@@ -114,7 +114,7 @@ public class RatingControl: UIControl {
                 element.element.isSelected = (index < newValue) ? prevSelected : !prevSelected
                 prevSelectedValues[index] = (index < newValue) ? prevSelected : !prevSelected
                 
-            } else if newValue > value && !isFirstTime {
+            } else if newValue > value {
                 let image = UIImage(systemName: (index < value || isFirstTime) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
                 element.element.setImage(image, for: .normal)
