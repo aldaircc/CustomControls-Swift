@@ -84,11 +84,13 @@ public class RatingControl: UIControl {
             //evaluar si se presiono el mismo valor
             
             guard newValue != value else {
-                let prev = prevSelectedValues[indice]
-                let image = UIImage(systemName: !prev ? "star.fill": "star")?.withRenderingMode(.alwaysOriginal)
-                image?.withTintColor(.yellow)
-                ratingImages[indice].setImage(image, for: .normal)
-                prevSelectedValues[indice] = !prev
+                if indice < newValue {
+                    let prev = prevSelectedValues[indice]
+                    let image = UIImage(systemName: !prev ? "star.fill": "star")?.withRenderingMode(.alwaysOriginal)
+                    image?.withTintColor(.yellow)
+                    ratingImages[indice].setImage(image, for: .normal)
+                    prevSelectedValues[indice] = !prev
+                }
                 continue
             }
             
