@@ -121,20 +121,6 @@ public class RatingControl: UIControl {
                 element.element.isSelected = (index < value) ? prevSelected : !prevSelected
                 prevSelectedValues[index] = (index < value) ? prevSelected : !prevSelected
             }
-            
-//            if index < newValue {
-//                let image = UIImage(systemName: !prevSelected ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-//                image?.withTintColor(.yellow)
-//                element.element.setImage(image, for: .normal)
-//                element.element.isSelected = !prevSelected
-//                prevSelectedValues[index] = !prevSelected
-//            } else {
-//                let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
-//                image?.withTintColor(.yellow)
-//                element.element.setImage(image, for: .normal)
-//                prevSelectedValues[index] = false
-//                element.element.isSelected = false
-//            }
         }
         self.value = (value != newValue) ? newValue : 0
         self.isFirstTime = false
