@@ -123,7 +123,7 @@ public class RatingControl: UIControl {
                 
             } else if newValue > value {
                 // solo actualizo los indice que son mayor/igual a value
-                if index >= value {
+                if index >= value && index <= newValue {
                     prevSelectedValues[index] = !prevSelectedValues[index]
                     let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
                     image?.withTintColor(.yellow)
