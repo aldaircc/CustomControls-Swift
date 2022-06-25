@@ -17,7 +17,6 @@ public class RatingControl: UIControl {
         stack.distribution = .equalSpacing
         stack.spacing = 5
         stack.axis = .horizontal
-        stack.backgroundColor = .yellow
         return stack
     }()
     
@@ -54,7 +53,6 @@ public class RatingControl: UIControl {
             image.withTintColor(selected ? .yellow : .clear)
             let button = UIButton()
             button.tag = id
-            button.backgroundColor = .red
             button.setImage(image, for: .normal)
             button.addTarget(self, action: #selector(ratingSelectionChanging(_:)), for: .touchUpInside)
             
