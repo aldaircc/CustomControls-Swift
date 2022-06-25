@@ -82,6 +82,16 @@ public class RatingControl: UIControl {
         // Ir hasta newValue y establecer "selected = true"
         for indice in 0..<ratingImages.count {
             //evaluar si se presiono el mismo valor
+            
+            guard newValue != value else {
+                let prev = prevSelectedValues[indice]
+                let image = UIImage(systemName: !prev ? "star": "star.fill")?.withRenderingMode(.alwaysOriginal)
+                image?.withTintColor(.yellow)
+                ratingImages[indice].setImage(image, for: .normal)
+                prevSelectedValues[indice] = !prev
+                return
+            }
+            
             if indice < newValue {
                 let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
