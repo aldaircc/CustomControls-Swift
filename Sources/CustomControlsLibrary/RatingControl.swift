@@ -68,71 +68,34 @@ public class RatingControl: UIControl {
         sendActions(for: .valueChanged)
     }
     
+    func resetRatingSelection() {
+        ratingImages.enumerated().forEach { element in
+            let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
+            image?.withTintColor(.yellow)
+            element.element.setImage(image, for: .normal)
+            element.element.isSelected = false
+        }
+    }
+    
     func setColorToRating(newValue: Int) {
+        resetRatingSelection()
         ratingImages.enumerated().forEach { element in
             
-//            guard self.value != value else {
-//
-//                if value >= element.offset {
-//                    let isOn = element.element.isSelected
-//                    let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-//                    image?.withTintColor(.yellow)
-//                    element.element.setImage(image, for: .normal)
-//                    element.element.isSelected.toggle()
-//
-//                } else {
-//                    let isOn = element.element.isSelected
-//                    let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-//                    image?.withTintColor(.yellow)
-//                    element.element.setImage(image, for: .normal)
-//                    element.element.isSelected = false
-//                }
-//
-//
-//                //element.element.isSelected = false
-//
-//
-//                return
-//            }
-//
-//            let image = UIImage(systemName: (element.offset < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-//            image?.withTintColor(.yellow)
-//            element.element.setImage(image, for: .normal)
-//            element.element.isSelected.toggle()
+            // FINAL SOLUTION
+            /*: Every time to set value, first you have to reset
+             the appareance of control and after that you should
+             set next value.
+             */
             
-            guard self.value != newValue else {
-                // evaluar los indices menores a valor
-                // verificar su antiguo valor "isSelected"
-                if newValue > element.offset {
-                    let isOn = element.element.isSelected
-                    let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    element.element.setImage(image, for: .normal)
-                    element.element.isSelected = !isOn
-                } else {
-                    let isOn = element.element.isSelected
-                    let image = UIImage(systemName: (isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    element.element.setImage(image, for: .normal)
-                    element.element.isSelected = false
-                }
+            guard newValue > element.offset else {
                 return
             }
-            
-            if newValue > element.offset {
-                let isOn = element.element.isSelected
-                let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                image?.withTintColor(.yellow)
-                element.element.setImage(image, for: .normal)
-                element.element.isSelected.toggle()
-            } else {
-                let isOn = element.element.isSelected
-                let image = UIImage(systemName: (isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                image?.withTintColor(.yellow)
-                element.element.setImage(image, for: .normal)
-                element.element.isSelected = false
-            }
-            
+
+            let isOn = element.element.isSelected
+            let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+            image?.withTintColor(.yellow)
+            element.element.setImage(image, for: .normal)
+            element.element.isSelected.toggle()
         }
         self.value = (self.value != newValue) ? newValue : 0
     }
