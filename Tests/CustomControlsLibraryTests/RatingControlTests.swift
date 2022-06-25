@@ -36,13 +36,7 @@ class RatingControlTests: XCTestCase {
         
         ratingControl?.ratingSelectionChanging(ratingControl?.contentStackView.arrangedSubviews[1] as! UIButton)
         
-        let aspectoSeleccionadox = ratingControl?.ratingImages.filter({ $0.currentImage == UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal) }).count
-        
         ratingControl?.ratingSelectionChanging(ratingControl?.contentStackView.arrangedSubviews[1] as! UIButton)
-        
-        let aspectoSeleccionado = ratingControl?.ratingImages.filter({ $0.currentImage == UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal) }).count
-        
-        let aspectoDeseleccionado = ratingControl?.ratingImages.filter({ $0.currentImage == UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal) }).count
         
         let newValue = try XCTUnwrap(ratingControl?.value)
         XCTAssert(value == newValue, "The value never changed")

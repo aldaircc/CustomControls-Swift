@@ -78,40 +78,26 @@ public class RatingControl: UIControl {
     }
     
     func setColorToRating(newValue: Int) {
-        resetRatingSelection()
+        /*: 1 - Happy Path
+         - Seleciono 3
+         - Se seleccionan los items 1, 2 y 3
+         */
+        
         ratingImages.enumerated().forEach { element in
-            
-            // FINAL SOLUTION
-            /*: Every time to set value, first you have to reset
-             the appareance of control and after that you should
-             set next value.
-             */
-            
-            guard newValue != value else {
-                if element.offset < newValue {
-                    let prevSelected1 = prevSelectedValues[element.offset]
-                    let isOn = element.element.isSelected
-                    let image = UIImage(systemName: (prevSelected1 == !isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    element.element.setImage(image, for: .normal)
-                    element.element.isSelected = !prevSelected1
-                    prevSelectedValues[element.offset].toggle()
-                }
-                return
-            }
-            
-            if element.offset < newValue {
-                let prevSelected2 = prevSelectedValues[element.offset]
-                prevSelectedValues[element.offset].toggle()
-                let isOn = element.element.isSelected
-                let image = UIImage(systemName: (!isOn) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+            let index = element.offset
+            let prevSelected = prevSelectedValues[index]
+            if index < newValue {
+                let image = UIImage(systemName: !prevSelected ? "star" : "star.fill")
                 image?.withTintColor(.yellow)
                 element.element.setImage(image, for: .normal)
-                element.element.isSelected = !prevSelected2
+                prevSelectedValues[index] = !prevSelected
+            } else {
+                let image = UIImage(systemName: "star")
+                image?.withTintColor(.yellow)
+                element.element.setImage(image, for: .normal)
+                prevSelectedValues[index] = false
             }
-            
         }
-        self.value = (self.value != newValue) ? newValue : 0
     }
     
     /*
