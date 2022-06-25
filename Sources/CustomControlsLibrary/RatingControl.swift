@@ -87,7 +87,7 @@ public class RatingControl: UIControl {
             let index = element.offset
             let prevSelected = prevSelectedValues[index]
             if index < newValue {
-                let image = UIImage(systemName: !prevSelected ? "star" : "star.fill")
+                let image = UIImage(systemName: !prevSelected ? "star.fill" : "star")
                 image?.withTintColor(.yellow)
                 element.element.setImage(image, for: .normal)
                 prevSelectedValues[index] = !prevSelected
@@ -98,6 +98,7 @@ public class RatingControl: UIControl {
                 prevSelectedValues[index] = false
             }
         }
+        self.value = newValue
     }
     
     /*
