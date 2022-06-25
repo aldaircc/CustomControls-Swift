@@ -33,11 +33,8 @@ class RatingControlTests: XCTestCase {
     func testGetValue() throws {
         ratingControl = RatingControl(size: size, value: 0)
         let value = try XCTUnwrap(ratingControl?.value)
-        
         ratingControl?.ratingSelectionChanging(ratingControl?.contentStackView.arrangedSubviews[2] as! UIButton)
-        
         ratingControl?.ratingSelectionChanging(ratingControl?.contentStackView.arrangedSubviews[2] as! UIButton)
-        
         let newValue = try XCTUnwrap(ratingControl?.value)
         XCTAssert(value == newValue, "The value never changed")
         XCTAssert(newValue == 0, "The current value is different than 1")

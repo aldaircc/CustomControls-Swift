@@ -26,7 +26,6 @@ public class RatingControl: UIControl {
     public private(set) var value: Int
     private(set) var ratingImages: [UIButton] = []
     private(set) var prevSelectedValues: [Bool] = []
-    private(set) var isFirstTime: Bool = true
     
     public init(size: Int, value: Int) {
         self.size = size
@@ -79,9 +78,7 @@ public class RatingControl: UIControl {
     
     func setColorToRating(newValue: Int) {
         resetRatingSelection()
-        // Ir hasta newValue y establecer "selected = true"
         for indice in 0..<ratingImages.count {
-            //evaluar si se presiono el mismo valor
             
             guard newValue != value else {
                 if indice < newValue {
@@ -107,7 +104,6 @@ public class RatingControl: UIControl {
             }
         }
         self.value = (value != newValue) ? newValue : 0
-        self.isFirstTime = false
     }
     
     /*
