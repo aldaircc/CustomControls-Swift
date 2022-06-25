@@ -26,6 +26,7 @@ public class RatingControl: UIControl {
     public private(set) var value: Int
     private(set) var ratingImages: [UIButton] = []
     private(set) var prevSelectedValues: [Bool] = []
+    private(set) var isFirstTime: Bool = true
     
     public init(size: Int, value: Int) {
         self.size = size
@@ -105,16 +106,16 @@ public class RatingControl: UIControl {
                 return
             }
             
-            if newValue < value {
+            if newValue < value && !isFirstTime {
                 
-                let image = UIImage(systemName: (index < newValue) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+                let image = UIImage(systemName: (index < newValue || isFirstTime) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
                 element.element.setImage(image, for: .normal)
                 element.element.isSelected = (index < newValue) ? prevSelected : !prevSelected
                 prevSelectedValues[index] = (index < newValue) ? prevSelected : !prevSelected
                 
-            } else if newValue > value {
-                let image = UIImage(systemName: (index < value) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
+            } else if newValue > value && !isFirstTime {
+                let image = UIImage(systemName: (index < value || isFirstTime) ? "star.fill" : "star")?.withRenderingMode(.alwaysOriginal)
                 image?.withTintColor(.yellow)
                 element.element.setImage(image, for: .normal)
                 element.element.isSelected = (index < value) ? prevSelected : !prevSelected
@@ -136,6 +137,7 @@ public class RatingControl: UIControl {
 //            }
         }
         self.value = (value != newValue) ? newValue : 0
+        self.isFirstTime = false
     }
     
     /*
