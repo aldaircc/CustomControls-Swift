@@ -78,66 +78,22 @@ public class RatingControl: UIControl {
     }
     
     func setColorToRating(newValue: Int) {
-        /*:
-         selecciono 1
-         reseteo apariencia
-         valido que newValue y value sean diferentes
-         Si newValue y value son iguales = preservo valore hasta ese indice el resto los reseteo o false
-         
-         */
         resetRatingSelection()
-        ratingImages.enumerated().forEach { rating in
-            let index = rating.offset
-            
-            if newValue == value {
-                if (index < newValue) {
-                    prevSelectedValues[index] = prevSelectedValues[index]
-                    let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    rating.element.setImage(image, for: .normal)
-                    rating.element.isSelected = prevSelectedValues[index]
-                } else {
-                    prevSelectedValues[index] = !prevSelectedValues[index]
-                    let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    rating.element.setImage(image, for: .normal)
-                    rating.element.isSelected = prevSelectedValues[index]
-                }
-            }
-            
-            if value > newValue {
-                // solo actualizo los indices que son mayor/igual a newValue
-                
-                if index >= newValue {
-                    prevSelectedValues[index] = !prevSelectedValues[index]
-                    let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    rating.element.setImage(image, for: .normal)
-                    rating.element.isSelected = prevSelectedValues[index]
-                } else {
-                    let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    rating.element.setImage(image, for: .normal)
-                    rating.element.isSelected = prevSelectedValues[index]
-                }
-                
-            } else if newValue > value {
-                // solo actualizo los indice que son mayor/igual a value
-                if index >= value && index < newValue {
-                    prevSelectedValues[index] = !prevSelectedValues[index]
-                    let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    rating.element.setImage(image, for: .normal)
-                    rating.element.isSelected = prevSelectedValues[index]
-                } else {
-                    let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
-                    image?.withTintColor(.yellow)
-                    rating.element.setImage(image, for: .normal)
-                    rating.element.isSelected = prevSelectedValues[index]
-                }
+        // Ir hasta newValue y establecer "selected = true"
+        for indice in 0..<ratingImages.count {
+            //evaluar si se presiono el mismo valor
+            if indice < newValue {
+                let image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
+                image?.withTintColor(.yellow)
+                ratingImages[indice].setImage(image, for: .normal)
+                prevSelectedValues[indice] = true
+            } else {
+                let image = UIImage(systemName: "star")?.withRenderingMode(.alwaysOriginal)
+                image?.withTintColor(.yellow)
+                ratingImages[indice].setImage(image, for: .normal)
+                prevSelectedValues[indice] = false
             }
         }
-        
         self.value = (value != newValue) ? newValue : 0
         self.isFirstTime = false
     }
