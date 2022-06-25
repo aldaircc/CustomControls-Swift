@@ -89,7 +89,7 @@ public class RatingControl: UIControl {
                 image?.withTintColor(.yellow)
                 ratingImages[indice].setImage(image, for: .normal)
                 prevSelectedValues[indice] = !prev
-                return
+                continue
             }
             
             if indice < newValue {
